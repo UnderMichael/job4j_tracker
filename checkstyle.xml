@@ -20,6 +20,7 @@
     <!-- </module> -->
 
     <module name="TreeWalker">
+        <module name="VisibilityModifier"/>
 
         <module name="EmptyLineSeparator"> <!-- Java Style Guide: Source file structure -->
             <property name="tokens" value="
