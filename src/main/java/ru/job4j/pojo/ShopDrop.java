@@ -23,10 +23,11 @@ public class ShopDrop {
 	}
 
 	public static Product[] delete(Product[] products, int index) {
-		int lastIndex = products.length - 1;
-		for (int i = index; i < products.length; i++) {
-			products[i] = (i != lastIndex) ? products[i + 1] : null;
+
+		for (int i = index; i < products.length - 1; i++) {
+			products[i] = products[i + 1];
 		}
+		products[products.length - 1] = null;
 		return products;
 	}
 }
