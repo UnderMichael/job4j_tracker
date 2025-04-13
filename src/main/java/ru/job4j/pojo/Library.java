@@ -16,7 +16,7 @@ public class Library {
 		books[0] = books[3];
 		books[3] = tmp;
 		for (Book book : books) {
-			if (book.getName() == "Clean code") {
+			if (book.getName().equals("Clean code")) {
 				System.out.println("book name: " + book.getName() + ", pages: " + book.getPages());
 			}
 		}
