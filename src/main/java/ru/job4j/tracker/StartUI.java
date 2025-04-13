@@ -57,6 +57,20 @@ public class StartUI {
 		}
 	}
 
+	private void listItemsByName() {
+		System.out.println("=== Вывод заявок по имени ===");
+		System.out.print("Введите имя: ");
+		String name = scanner.nextLine();
+		Item[] items = tracker.findByName(name);
+		if (items.length > 0) {
+			for (Item item : items) {
+				System.out.println(item);
+			}
+		} else {
+			System.out.println("Заявки с именем: " + name + " не найдены.");
+		}
+	}
+
 	private void getItemById() {
 		System.out.println("=== Вывод заявки по id ===");
 		System.out.print("Введите id: ");
@@ -92,6 +106,9 @@ public class StartUI {
 					break;
 				case 4:
 					getItemById();
+					break;
+				case 5:
+					listItemsByName();
 					break;
 				case 6:
 					run = false;
