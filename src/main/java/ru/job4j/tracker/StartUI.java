@@ -1,17 +1,13 @@
 package ru.job4j.tracker;
 
 public class StartUI {
-	private Input input;
-
-	private Tracker tracker;
-
 	public static void main(String[] args) {
 		Input input = new ConsoleInput();
 		Tracker tracker = new Tracker();
 		new StartUI().init(input, tracker);
 	}
 
-	private void createItem() {
+	public static void createItem(Input input, Tracker tracker) {
 		System.out.println("=== Создание новой заявки ===");
 		String name = input.askStr("Введите имя: ");
 		Item item = new Item(name);
@@ -19,7 +15,7 @@ public class StartUI {
 		System.out.println("Добавленная заявка: " + item);
 	}
 
-	private void deleteItem() {
+	public static void deleteItem(Input input, Tracker tracker) {
 		System.out.println("=== Удаление заявки ===");
 		int id = input.askInt("Введите id: ");
 		Item item = tracker.findById(id);
@@ -27,7 +23,7 @@ public class StartUI {
 		System.out.println(item != null ? "Заявка удалена успешно." : "Ошибка удаления заявки.");
 	}
 
-	private void editItem() {
+	public static void replaceItem(Input input, Tracker tracker) {
 		System.out.println("=== Редактирование заявки ===");
 		int id = input.askInt("Введите id: ");
 		String name = input.askStr("Введите имя: ");
@@ -39,7 +35,7 @@ public class StartUI {
 		}
 	}
 
-	private void listAllItems() {
+	public static void findAllItems(Tracker tracker) {
 		System.out.println("=== Вывод всех заявок ===");
 		Item[] items = tracker.findAll();
 		if (items.length > 0) {
@@ -51,7 +47,7 @@ public class StartUI {
 		}
 	}
 
-	private void listItemsByName() {
+	public static void findItemByName(Input input, Tracker tracker) {
 		System.out.println("=== Вывод заявок по имени ===");
 		String name = input.askStr("Введите имя: ");
 		Item[] items = tracker.findByName(name);
@@ -64,7 +60,7 @@ public class StartUI {
 		}
 	}
 
-	private void getItemById() {
+	public static void findItemById(Input input, Tracker tracker) {
 		System.out.println("=== Вывод заявки по id ===");
 		int id = input.askInt("Введите id: ");
 		Item item = tracker.findById(id);
@@ -75,31 +71,29 @@ public class StartUI {
 		}
 	}
 
-	public void init(Input scanner, Tracker tracker) {
-		this.input = scanner;
-		this.tracker = tracker;
+	public void init(Input input, Tracker tracker) {
 		boolean run = true;
 		while (run) {
 			showMenu();
 			int select = input.askInt("Выбрать: ");
 			switch (select) {
 				case 0:
-					createItem();
+					createItem(input, tracker);
 					break;
 				case 1:
-					listAllItems();
+					findAllItems(tracker);
 					break;
 				case 2:
-					editItem();
+					replaceItem(input, tracker);
 					break;
 				case 3:
-					deleteItem();
+					deleteItem(input, tracker);
 					break;
 				case 4:
-					getItemById();
+					findItemById(input, tracker);
 					break;
 				case 5:
-					listItemsByName();
+					findItemByName(input, tracker);
 					break;
 				case 6:
 					run = false;
