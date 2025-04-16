@@ -26,17 +26,11 @@ public class PasswordValidator {
 			}
 			if (Character.isDigit(symbol)) {
 				hasDigit = true;
-				continue;
-			}
-			if (Character.isUpperCase(symbol)) {
+			} else if (Character.isUpperCase(symbol)) {
 				hasUpCase = true;
-				continue;
-			}
-			if (Character.isLowerCase(symbol)) {
+			} else if (Character.isLowerCase(symbol)) {
 				hasLowCase = true;
-				continue;
-			}
-			if (!Character.isLetterOrDigit(symbol)) {
+			} else if (!Character.isLetterOrDigit(symbol)) {
 				hasSpecial = true;
 			}
 		}
