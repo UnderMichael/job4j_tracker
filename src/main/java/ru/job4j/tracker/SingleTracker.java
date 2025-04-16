@@ -14,4 +14,28 @@ public final class SingleTracker {
 		}
 		return instance;
 	}
+
+	public Item add(Item item) {
+		return this.tracker.add(item);
+	}
+
+	public Item[] findAll() {
+		return this.tracker.findAll();
+	}
+
+	public Item[] findByName(String key) {
+		return this.tracker.findByName(key);
+	}
+
+	public void delete(int id) {
+		this.tracker.delete(id);
+	}
+
+	public Item findById(int id) {
+		return this.tracker.findById(id);
+	}
+
+	public boolean replace(int id, Item item) {
+		return this.tracker.replace(id, item);
+	}
 }
