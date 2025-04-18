@@ -24,7 +24,7 @@ public class PhoneDictionaryTest {
 		phones.add(new Person("Alexey", "Vinogradov", "202122", "Ufa"));
 		phones.add(new Person("Tatiana", "Zaitseva", "909090", "Chelyabinsk"));
 		ArrayList<Person> persons = phones.find("Petr");
-		assertThat(persons.getFirst().surname()).isEqualTo("Arsentev");
+		assertThat(persons.get(0).surname()).isEqualTo("Arsentev");
 	}
 
 	@Test
