@@ -1,51 +1,58 @@
 package ru.job4j.tracker;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 public class Tracker {
-	private final List<Item> items = new ArrayList<>();
+	private final Item[] items = new Item[100];
 
 	private int ids = 1;
 
+	private int size = 0;
+
 	public Item add(Item item) {
 		item.setId(ids++);
-		items.add(item);
+		items[size++] = item;
 		return item;
 	}
 
-	public List<Item> findAll() {
-		return items;
+	public Item[] findAll() {
+		return Arrays.copyOf(items, size);
 	}
 
-	public List<Item> findByName(String key) {
-		List<Item> result = new ArrayList<>();
-		for (Item item : items) {
-			if (item.getName().equals(key)) {
-				result.add(item);
+	public Item[] findByName(String key) {
+		Item[] result = new Item[size];
+		int resultSize = 0;
+		for (int i = 0; i < size; i++) {
+			if (this.items[i].getName().equals(key)) {
+				result[resultSize] = this.items[i];
+				resultSize++;
 			}
 		}
-		return result;
+		return Arrays.copyOf(result, resultSize);
 	}
 
 	public void delete(int id) {
-		Item item = findById(id);
-		items.remove(item);
+		int index = indexOf(id);
+		if (index != -1) {
+			int length = size - index - 1;
+			System.arraycopy(items, index + 1, items, index, length);
+			items[size - 1] = null;
+			size--;
+		}
 	}
 
 	public Item findById(int id) {
 		int index = indexOf(id);
-		return index != -1 ? items.get(index) : null;
+		return index != -1 ? items[index] : null;
 	}
 
 	public boolean replace(int id, Item item) {
-		Item oldItem = findById(id);
-		boolean result = oldItem != null;
+		int index = indexOf(id);
+		boolean result = index != -1;
 
 		if (result) {
-			items.remove(oldItem);
 			item.setId(id);
-			items.add(item);
+			items[index] = item;
 		}
 
 		return result;
@@ -53,8 +60,8 @@ public class Tracker {
 
 	private int indexOf(int id) {
 		int result = -1;
-		for (int index = 0; index < items.size(); index++) {
-			if (items.get(index).getId() == id) {
+		for (int index = 0; index < size; index++) {
+			if (items[index].getId() == id) {
 				result = index;
 				break;
 			}
