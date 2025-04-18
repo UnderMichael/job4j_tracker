@@ -3,6 +3,7 @@ package ru.job4j.early;
 public class PasswordValidator {
 	private static final String[] FORBIDDEN = {"qwerty", "12345", "password", "admin", "user"};
 
+	@SuppressWarnings("checkstyle:MethodLength")
 	public static String validate(String password) throws IllegalArgumentException {
 		if (password == null) {
 			throw new IllegalArgumentException("Password can't be null");
