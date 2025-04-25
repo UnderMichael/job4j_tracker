@@ -12,7 +12,6 @@ public class AnalyzeByMap {
 				count++;
 			}
 		}
-
 		return (double) sum / count;
 	}
 
@@ -67,12 +66,9 @@ public class AnalyzeByMap {
 
 	private static Map<String, Integer> getSubjectsScoreMap(List<Pupil> pupils) {
 		Map<String, Integer> map = new LinkedHashMap<>();
-		for (Pupil pupil : pupils) {
-			for (Subject subject : pupil.subjects()) {
-				int oldSum = map.getOrDefault(subject.name(), 0);
-				map.put(subject.name(), oldSum + subject.score());
-			}
-		}
+		pupils.forEach(pupil ->
+				pupil.subjects().forEach(subject ->
+						map.merge(subject.name(), subject.score(), Integer::sum)));
 		return map;
 	}
 
